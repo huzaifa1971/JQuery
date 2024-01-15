@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui-1.13.2/jquery-ui.js"></script>
+    <link href="jquery-ui-1.13.2/jquery-ui.css" rel="stylesheet">
+    <style>
+            .draggable { width: 90px; height: 90px; padding: 0.5em; float: left; margin: 0 10px 10px 40px; }
+            #containment-wrapper { width: 95%; height:150px; border:2px solid #ccc; padding: 10px; background-color: black;}
+            h3 { clear: left; }
+
+            #draggable3{
+
+                background-color: white;
+                border-radius: 50%;
+            }
+    </style>
+    
+</head>
+<body>
+
+    <div id="containment-wrapper">
+        <div id="draggable3" class="draggable ui-widget-content">
+            <p>Drag me with in boxx</p>
+        </div>
+    </div>
+    <script>
+
+        $( function() {
+            $( "#draggable3" ).draggable({ containment: "#containment-wrapper", scroll: false});
+        } );
+
+    </script>
+</body>
+</html>

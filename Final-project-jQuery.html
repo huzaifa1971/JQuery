@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui-1.13.2/jquery-ui.js"></script>
+    <link href="jquery-ui-1.13.2/jquery-ui.css" rel="stylesheet">
+    <style>
+
+
+        body{
+
+            padding: 0 !important;;
+            margin: 0; 
+            height:100%;
+            
+            
+        }
+        #header{
+
+            background-color: #eeeeee;
+            width: 100%;
+            height: 35px;
+            float: left;
+        }
+        #logo{
+
+            float: left;
+            padding: 9px 2px;
+            font-weight: bold;
+        }
+        #buttonContainer{
+
+            width: 255px;
+            margin: 0 auto;
+            padding-top: 2px;
+        }
+        .togglebutton{
+
+            float: left;
+            border: 1px solid black;
+            padding: 6px;
+            border-right: none;
+        }
+        #html{
+
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        #output{
+
+            border-right: 1px solid black;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        .active{
+
+            background-color: #E8F2FF;
+
+        }
+        .highlightedbutton{
+
+            background-color: gray;
+        }
+        textarea{
+
+            
+            resize: none;
+            border-top: none;
+            border-color: gray;
+
+        }
+        #bodyContainer{
+
+            margin-left: 0px;
+           
+
+        }
+        .panel {
+
+            float: left;
+            width: 50%;
+            border-left: none;
+        }
+        iframe{
+
+            border: none;
+
+        }
+        .hidden{
+
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="logo">CODEBUZZ</div>
+        <div id="buttonContainer">
+
+            <div class="togglebutton active" id="html">HTML</div>
+            <div class="togglebutton" id="css">CSS</div>
+            <div class="togglebutton" id="javascript">JavaScript</div>
+            <div class="togglebutton active" id="output">OUTPUT</div>
+
+        </div>
+
+    </div>
+    <div id="bodyContainer">
+
+        <textarea id="htmltext" class="panel"><p id="para">Hello World!</p></textarea>
+        <textarea id="csstext" class="panel hidden">p { color : red;}</textarea>
+        <textarea id="javascripttext" class="panel hidden">document.getElementById("para").innerHTML = ("Hello Huzaifa")</textarea>
+        <iframe id="outputtext" class="panel"></iframe>
+
+    </div>
+    <script>
+
+        function updateoutput(){
+
+            $("iframe").contents().find("html").html("<html><head><style>" + $("#csstext").val() 
+                + "</style></head><body>" + $("#htmltext").val() + "</body></html>" );
+
+            document.getElementById("outputtext").contentWindow.eval($("#javascripttext").val());
+            
+
+            
+        }
+        
+
+        $(".togglebutton").hover(function(){
+
+            $(this).addClass("highlightedbutton");
+
+        }, function(){
+
+            $(this).removeClass("highlightedbutton");
+
+        });
+
+        $(".togglebutton").click(function(){
+
+            $(this).toggleClass("active");
+            $(this).removeClass("highlightedbutton")
+            var textId = $(this).attr("id") + "text";
+            $("#" + textId).toggleClass("hidden");
+            var numofactivetexts = 4 - $('.hidden').length;
+            $(".panel").width(($(window).width() / numofactivetexts) - 10);
+
+        })
+        $(".panel").height($(window).height() - $("#header").height() - 10)
+        $(".panel").width(($(window).width() / 2) - 10);
+        updateoutput();
+
+        $("textarea").on('change keyup paste', function(){
+
+            updateoutput();
+
+
+
+        });
+
+    </script>
+</body>
+</html>

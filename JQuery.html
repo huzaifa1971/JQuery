@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery</title>
+    <script src="jquery.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <p></p>
+
+    <script>
+
+        $.ajax("info.txt").done(function(data){
+            $("p").html(data);
+        }).fail(function(data){
+            alert("Not Found")
+        })
+
+    </script>
+</body>
+</html>
